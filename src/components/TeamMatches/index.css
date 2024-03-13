@@ -1,0 +1,106 @@
+.match-bg-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+}
+.main-match-img {
+  width: 90%;
+  height: 35%;
+}
+@media (min-width: 768px) {
+  .main-match-img {
+    width: 80%;
+  }
+}
+.latest-matches {
+  color: #ffffff;
+  align-self: flex-start;
+  font-size: 16px;
+  font-family: 'Bree Serif';
+  padding-left: 10px;
+  margin-bottom: 15px;
+}
+@media (min-width: 567px) {
+  .latest-matches {
+    padding-left: 40px;
+  }
+}
+@media (min-width: 768px) {
+  .latest-matches {
+    padding-left: 80px;
+  }
+}
+@media (min-width: 992px) {
+  .latest-matches {
+    padding-left: 120px;
+  }
+}
+
+.unordered-match-cards-container {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
+}
+@media (min-width: 1200px) {
+  .unordered-match-cards-container {
+    width: 85%;
+  }
+}
+.bg-color1 {
+  background-image: linear-gradient(to bottom, #a4261d, #1e293b);
+  min-height: 100vh;
+  background-size: cover;
+}
+.bg-color2 {
+  background-image: linear-gradient(to bottom, #5755a7, #1e293b);
+  min-height: 100vh;
+  background-size: cover;
+}
+.bg-color3 {
+  background-image: linear-gradient(to bottom, #d91c1f, #1e293b);
+  min-height: 100vh;
+  background-size: cover;
+}
+.bg-color4 {
+  background-image: linear-gradient(to bottom, #f7db00, #1e293b);
+  min-height: 100vh;
+  background-size: cover;
+}
+.bg-color5 {
+  background-image: linear-gradient(to bottom, #f7db00, #1e293b);
+  min-height: 100vh;
+  background-size: cover;
+}
+.bg-color6 {
+  background-image: linear-gradient(to bottom, #ffffff33, #1e293b);
+  min-height: 100vh;
+  background-size: cover;
+}
+.bg-color7 {
+  background-image: linear-gradient(to bottom, #da237b, #1e293b);
+  min-height: 100vh;
+  background-size: cover;
+}
+.bg-color8 {
+  background-image: linear-gradient(to bottom, #13418b, #1e293b);
+  min-height: 100vh;
+  background-size: cover;
+}
+.bg-color9 {
+  background-image: linear-gradient(to bottom, #f26d22, #1e293b);
+  min-height: 100vh;
+  background-size: cover;
+}
+.bg-color10 {
+  background-image: linear-gradient(to bottom, #4f5db0, #1e293b);
+  min-height: 100vh;
+  background-size: cover;
+}
