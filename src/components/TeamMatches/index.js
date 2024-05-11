@@ -1,6 +1,8 @@
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+import {PieChart, Pie, Legend, Cell} from 'recharts'
 import LatestMatch from '../LatestMatch'
 import MatchCard from '../MatchCard'
 import './index.css'
@@ -60,7 +62,65 @@ class TeamMatches extends Component {
         matchStatus: each.match_status,
       })),
     }
+    console.log(updatedData)
     this.setState({matchDetails: updatedData, isLoading: false})
+  }
+
+  renderPieChart = () => {
+    const {matchDetails} = this.state
+    const {recentMatches, latestMatchDetails} = matchDetails
+    console.log(recentMatches)
+    const matchesWon = recentMatches.filter(each => each.matchStatus === 'Won')
+    const matchesLost = recentMatches.filter(
+      each => each.matchStatus === 'Lost',
+    )
+    const matchesDraw = recentMatches.filter(
+      each => each.matchStatus === 'Draw',
+    )
+
+    if (latestMatchDetails.matchStatus === 'Won') {
+      matchesWon.push(latestMatchDetails)
+    } else if (latestMatchDetails.matchStatus === 'Lost') {
+      matchesLost.push(latestMatchDetails)
+    } else {
+      matchesDraw.push(latestMatchDetails)
+    }
+
+    console.log(matchesDraw.length)
+
+    const data = [
+      {count: matchesWon.length, language: 'Won'},
+      {count: matchesLost.length, language: 'Lost'},
+      {count: matchesDraw.length, language: 'Draw'},
+    ]
+
+    return (
+      <PieChart width={500} height={300}>
+        <Pie
+          cx="50%"
+          cy="50%"
+          data={data}
+          startAngle={180}
+          endAngle={0}
+          innerRadius="40%"
+          outerRadius="70%"
+          dataKey="count"
+        >
+          <Cell name="Won" fill="#fecba6" />
+          <Cell name="Lost" fill="#b3d23f" />
+          <Cell name="Draw" fill="#a444c9e" />
+        </Pie>
+        <Legend
+          iconType="circle"
+          layout="horizontal"
+          verticallyAlign="middle"
+          align="center"
+          wrapperStyle={{
+            marginTop: '50px',
+          }}
+        />
+      </PieChart>
+    )
   }
 
   render() {
@@ -68,12 +128,13 @@ class TeamMatches extends Component {
     const index = Math.ceil(Math.random() * (bgColors.length - 1))
     const bgColorClassName = bgColors[index]
     const {teamBannerUrl, latestMatchDetails, recentMatches} = matchDetails
+
     return (
       <div>
         {isLoading ? (
           // <div testid="loader">
-          <div>
-            <Loader type="Oval" color="#ffffff" height={50} width={50} />{' '}
+          <div testid="loader">
+            <Loader type="Oval" color="#ffffff" height={50} width={50} />
           </div>
         ) : (
           <div className={`match-bg-container ${bgColorClassName}`}>
@@ -83,13 +144,22 @@ class TeamMatches extends Component {
               className="main-match-img"
             />
             <h1 className="latest-matches">Latest Matches</h1>
-
             <LatestMatch latestMatchDetails={latestMatchDetails} />
             <ul className="unordered-match-cards-container">
               {recentMatches.map(eachMatch => (
                 <MatchCard key={eachMatch.id} eachMatchDetails={eachMatch} />
               ))}
             </ul>
+            <div>
+              <h3 className="pie-heading">Pie Chart</h3>
+              {this.renderPieChart()}
+            </div>
+
+            <Link to="/" style={{alignSelf: 'flex-start'}}>
+              <button type="button" className="back-btn">
+                Back
+              </button>
+            </Link>
           </div>
         )}
       </div>
